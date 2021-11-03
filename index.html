@@ -4,10 +4,38 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Parrot Card Game</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
         <script defer src="assets/js/script.js" ></script>
     </head>
-    <body>
-        
+    <body class="verde" id="body">
+        <header class="verde">
+            <h1>PARROT CARD GAME</h1>
+        </header>
+        <main class="flex-column" id="main">
+            <div class="start flex-column verde-escuro">
+                <h2>Com quantas cartas deseja jogar ?<br>(4 - 14)</h2>
+                <input type="number" min="4" max="14" class="verde" id="input">
+                <button class="verde" onclick="jogar()">Começar</button>
+            </div>
+            <div class="game none">
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+            </div>
+        </main>
     </body>
 </html>
