@@ -25,6 +25,9 @@ h1{
 
     padding: 0 15px;
 }
+main{
+    padding: 100px 0;
+}
 
 
 .start,
@@ -40,6 +43,7 @@ h1{
 
     padding: 30px;
     margin: 0 15px;
+    gap:10px;
 }
 .start input {
     margin: 20px 0 10px;
