@@ -9,7 +9,8 @@ body{
 header{
     height: 150px;
 }
-h1{
+h1,
+.win h2{
     font-size: 56px;
     line-height: 66px;
     font-weight: 700;
@@ -20,12 +21,15 @@ h1{
 
 
 .start,
-.start button{
+.start button,
+.reiniciar,
+.reiniciar button{
     font-size: 20px;
     line-height: 35px;
     font-weight: 700;
 }
-.start{
+.start,
+.reiniciar{
     border-radius: 35px;
 
     text-align: center;
@@ -44,7 +48,8 @@ h1{
     width: 50px;
     text-align: center;
 }
-.start button{
+.start button,
+.reiniciar button{
     border: 0;
     border-radius: 5px;
     padding: 5px;
@@ -84,11 +89,30 @@ h1{
 .virar {
     transform: rotateY(180deg);
 }
+.win{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    opacity: 0;
+}
+.win h2{
+    margin-top: 50px;
+}
+.reiniciar {
+    margin-top: 50px;
+}
+.reiniciar button{
+    margin: 15px 10px 0;
+}
 
 
 
-
-
+.opacity{
+    opacity: 0.9;
+}
 .flex{
     display: flex;
     justify-content: center;

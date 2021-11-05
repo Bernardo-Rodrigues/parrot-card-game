@@ -1,14 +1,18 @@
 let invalido = false;
-let lista = [];
-let primeiraCarta;
 let primeiraCartaEstado = true;
 let virando = false;
+let lista = [];
+let primeiraCarta;
+let rodadas;
+
+let telaStart = document.querySelector(".start");
+let telaGame = document.querySelector(".game");
+let telaWin = document.querySelector(".win");
 
 function jogar () {
     let input = document.querySelector("#input");
     let cartas = parseInt(input.value);
-    let telaStart = document.querySelector(".start");
-    let telaGame = document.querySelector(".game");
+    rodadas = 0;
 
     if(cartas < 4 || cartas > 14 || (cartas % 2 !== 0)){
         if(!invalido) telaStart.innerHTML += "<h2>Quantidade inválida de cartas!</h2>";
@@ -22,7 +26,6 @@ function jogar () {
     }
 }
 function distribuirCartas(cartas){
-    let areaGame = document.querySelector(".game");
     let cont = 0;
 
     do{
@@ -37,7 +40,7 @@ function distribuirCartas(cartas){
     alert(lista);
 
     for(let i = 0; i < cartas; i ++){
-        areaGame.innerHTML += `<div class='carta flex carta-${lista[i]}' data-identifier='card' onclick='clicouCarta(this)'>
+        telaGame.innerHTML += `<div class='carta flex carta-${lista[i]}' data-identifier='card' onclick='clicouCarta(this)'>
                                     <div class='front-face face flex' data-identifier='front-face'>
                                         <img src='assets/media/front.png'/>
                                     </div>
@@ -52,8 +55,11 @@ function clicouCarta(carta){
     let frontFace = carta.querySelector(".front-face");
     let backFace = carta.querySelector(".back-face");
     let classeAtual = carta.classList[2];
+    let cartaVirada = carta.children[0].classList.contains("virar")
 
-    if(carta.classList.contains("acertou") || virando) return 0;
+    if(cartaVirada || virando) return;
+
+    rodadas++;
     
     frontFace.classList.toggle("virar");
     backFace.classList.toggle("virar");
@@ -80,4 +86,36 @@ function clicouCarta(carta){
         }
         primeiraCartaEstado = true;
     }
+    
+    let cartasCertas = document.querySelectorAll(".acertou");
+    
+    if(cartasCertas.length === lista.length) setTimeout(win(), 2000);
+}
+function win(){
+    telaGame.classList.remove("flex");
+    telaGame.classList.add("none");
+    telaWin.classList.remove("none")
+    telaWin.classList.add("opacity", "flex", "column")
+
+    telaWin.innerHTML = `
+    <h2>Parabéns,<br>Você ganhou em ${rodadas} rodadas!</h2>
+    <div class="reiniciar verde-escuro">
+        <h3>Quer jogar de novo?</h3>
+        <button class="verde" onclick="jogarDeNovo()">Sim</button>
+        <button class="verde" onclick="fim(this)">Não</button>
+    </div>
+    `
+}
+function jogarDeNovo(){
+    telaGame.innerHTML = ""
+    lista = [];
+
+    telaWin.classList.remove("opacity", "flex", "column")
+    telaWin.classList.add("none")
+    telaStart.classList.remove("none")
+}
+function fim(botao){
+    botao.parentNode.remove();
+
+    telaWin.innerHTML += "<h2>Obrigado por jogar :)</h2>"
 }
