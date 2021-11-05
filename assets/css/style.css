@@ -5,17 +5,9 @@
 }
 body{
     font-family: 'Roboto', sans-serif;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 header{
     height: 150px;
-
-    display: flex;
-    flex-direction: center;
-    align-items: center;
 }
 h1{
     font-size: 56px;
@@ -24,9 +16,6 @@ h1{
     text-align: center;
 
     padding: 0 15px;
-}
-main{
-    padding: 100px 0;
 }
 
 
@@ -72,22 +61,41 @@ main{
     margin: 0 15px;
 }
 .carta{
-    background-color: red;
     width: 117px;
     height: 146px;
+
+    position: relative;
 }
+.face {
+    width: 100%;
+    height: 100%;
+
+    background-color: #A7E9AF;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+  }
+.carta img{
+    width: 110px;
+}
+.virar {
+    transform: rotateY(180deg);
+}
+
 
 
 
 
 .flex{
     display: flex;
-}
-.flex-column{
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.column{
+    flex-direction: column;
 }
 .verde{
     background-color: #EEF9BF;
