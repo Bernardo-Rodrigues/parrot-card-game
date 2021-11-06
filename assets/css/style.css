@@ -7,7 +7,7 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 header{
-    height: 150px;
+    height: 120px;
 }
 h1,
 .win h2{
@@ -35,7 +35,7 @@ h1,
     text-align: center;
 
     padding: 30px;
-    margin: 0 15px;
+    margin: 75px 15px 0;
     gap:10px;
 }
 .start input {
@@ -55,6 +55,18 @@ h1,
     padding: 5px;
 
     cursor: pointer;
+}
+.game-details{
+    width: 100vw;
+    height: 80px;
+
+    margin-bottom: 20px;
+}
+.game-details .time,
+.game-details .moves{
+    text-align: center;
+
+    font-size: 20px;
 }
 .game {
     display: none;
@@ -97,8 +109,13 @@ h1,
     left: 0;
 
     opacity: 0;
+
+    transition: all 1s ease-in-out;
 }
-.win h2{
+.opacity{
+    opacity: 0.9;
+}
+.win h2:nth-child(2){
     margin-top: 50px;
 }
 .reiniciar {
@@ -110,9 +127,7 @@ h1,
 
 
 
-.opacity{
-    opacity: 0.9;
-}
+
 .flex{
     display: flex;
     justify-content: center;
@@ -120,6 +135,9 @@ h1,
 }
 .column{
     flex-direction: column;
+}
+.evenly{
+    justify-content: space-evenly;
 }
 .verde{
     background-color: #EEF9BF;

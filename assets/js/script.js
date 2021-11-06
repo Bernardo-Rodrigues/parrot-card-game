@@ -4,10 +4,16 @@ let virando = false;
 let lista = [];
 let primeiraCarta;
 let rodadas;
+let segundo = 0;
+let somarSegundoId;
 
 let telaStart = document.querySelector(".start");
 let telaGame = document.querySelector(".game");
 let telaWin = document.querySelector(".win");
+let gameDetails = document.querySelector(".game-details");
+let jogadas = document.querySelector(".moves").children[1];
+let segundos = document.querySelector(".time").children[1];
+
 
 function jogar () {
     let input = document.querySelector("#input");
@@ -22,10 +28,13 @@ function jogar () {
         telaStart.classList.add("none");
         telaGame.classList.remove("none");
         telaGame.classList.add("flex");
+        gameDetails.classList.remove("none");
+        gameDetails.classList.add("flex", "evenly");
         distribuirCartas(cartas);
     }
 }
 function distribuirCartas(cartas){
+    somarSegundoId = setInterval(somarSegundo, 1000);
     let cont = 0;
 
     do{
@@ -60,6 +69,7 @@ function clicouCarta(carta){
     if(cartaVirada || virando) return;
 
     rodadas++;
+    jogadas.innerHTML = rodadas;
     
     frontFace.classList.toggle("virar");
     backFace.classList.toggle("virar");
@@ -89,16 +99,20 @@ function clicouCarta(carta){
     
     let cartasCertas = document.querySelectorAll(".acertou");
     
-    if(cartasCertas.length === lista.length) setTimeout(win(), 2000);
+    if(cartasCertas.length === lista.length) setTimeout(win, 1000);
 }
 function win(){
+    clearInterval(somarSegundoId);
     telaGame.classList.remove("flex");
     telaGame.classList.add("none");
+    gameDetails.classList.add("none");
+    gameDetails.classList.remove("flex", "evenly");
     telaWin.classList.remove("none")
     telaWin.classList.add("opacity", "flex", "column")
+    
 
     telaWin.innerHTML = `
-    <h2>Parabéns,<br>Você ganhou em ${rodadas} rodadas!</h2>
+    <h2>Parabéns,<br>Você ganhou em ${rodadas} rodadas<br> e demorou ${segundo} segundos!</h2>
     <div class="reiniciar verde-escuro">
         <h3>Quer jogar de novo?</h3>
         <button class="verde" onclick="jogarDeNovo()">Sim</button>
@@ -118,4 +132,9 @@ function fim(botao){
     botao.parentNode.remove();
 
     telaWin.innerHTML += "<h2>Obrigado por jogar :)</h2>"
+}
+
+function somarSegundo() {
+    segundos.innerHTML = segundo;
+    segundo++;
 }
