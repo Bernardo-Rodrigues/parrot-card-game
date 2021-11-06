@@ -19,7 +19,6 @@ h1,
     padding: 0 15px;
 }
 
-
 .start,
 .start button,
 .restart,
@@ -109,8 +108,6 @@ h1,
     left: 0;
 
     opacity: 0;
-
-    transition: all 1s ease-in-out;
 }
 .opacity{
     opacity: 0.9;
@@ -124,9 +121,6 @@ h1,
 .restart button{
     margin: 15px 10px 0;
 }
-
-
-
 
 .flex{
     display: flex;

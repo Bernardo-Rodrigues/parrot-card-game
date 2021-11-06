@@ -14,7 +14,6 @@ let gameDetails = document.querySelector(".game-details");
 let rounds = document.querySelector(".moves").children[1];
 let seconds = document.querySelector(".time").children[1];
 
-
 function play () {
     let input = document.querySelector("#input");
     let cards = parseInt(input.value);
@@ -50,8 +49,6 @@ function distributeCards(cards){
         counter = 0;
     }while(cardlList.length < cards);
 
-    alert(cardlList);
-
     for(let i = 0; i < cards; i ++){
         gameScreen.innerHTML += `
             <div class='card flex card-${cardlList[i]}' data-identifier='card' onclick='clickCard(this)'>
@@ -65,7 +62,6 @@ function distributeCards(cards){
         `
     }
 }
-
 function clickCard(card){
     let frontFace = card.querySelector(".front-face");
     let backFace = card.querySelector(".back-face");
@@ -139,7 +135,6 @@ function end(button){
 
     winScreen.innerHTML += "<h2>Obrigado por jogar :)</h2>"
 }
-
 function countSeconds() {
     seconds.innerHTML = second;
     second++;
