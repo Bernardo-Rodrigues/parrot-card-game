@@ -1,140 +1,146 @@
-let invalido = false;
-let primeiraCartaEstado = true;
-let virando = false;
-let lista = [];
-let primeiraCarta;
-let rodadas;
-let segundo = 0;
-let somarSegundoId;
+let invalid = false;
+let firstCardState = true;
+let fliping = false;
+let cardlList = [];
+let firstCard;
+let round;
+let second;
+let countSecondsId;
 
-let telaStart = document.querySelector(".start");
-let telaGame = document.querySelector(".game");
-let telaWin = document.querySelector(".win");
+let startScreen = document.querySelector(".start");
+let gameScreen = document.querySelector(".game");
+let winScreen = document.querySelector(".win");
 let gameDetails = document.querySelector(".game-details");
-let jogadas = document.querySelector(".moves").children[1];
-let segundos = document.querySelector(".time").children[1];
+let rounds = document.querySelector(".moves").children[1];
+let seconds = document.querySelector(".time").children[1];
 
 
-function jogar () {
+function play () {
     let input = document.querySelector("#input");
-    let cartas = parseInt(input.value);
-    rodadas = 0;
+    let cards = parseInt(input.value);
 
-    if(cartas < 4 || cartas > 14 || (cartas % 2 !== 0)){
-        if(!invalido) telaStart.innerHTML += "<h2>Quantidade inválida de cartas!</h2>";
-        invalido = true;
+    round = 0;
+    rounds.innerHTML = round;
+    second = 0;
+    seconds.innerHTML = second;
+
+    if(cards < 4 || cards > 14 || (cards % 2 !== 0)){
+        if(!invalid) startScreen.innerHTML += "<h2>Quantidade inválida de cartas!</h2>";
+        invalid = true;
         input.value = null;
     }else{
-        telaStart.classList.add("none");
-        telaGame.classList.remove("none");
-        telaGame.classList.add("flex");
+        startScreen.classList.add("none");
+        gameScreen.classList.remove("none");
+        gameScreen.classList.add("flex");
         gameDetails.classList.remove("none");
         gameDetails.classList.add("flex", "evenly");
-        distribuirCartas(cartas);
+        distributeCards(cards);
     }
 }
-function distribuirCartas(cartas){
-    somarSegundoId = setInterval(somarSegundo, 1000);
-    let cont = 0;
+function distributeCards(cards){
+    countSecondsId = setInterval(countSeconds, 1000);
+    let counter = 0;
 
     do{
-        let random = parseInt(Math.random () * (cartas / 2));
-        for(let i = 0; i < lista.length; i ++){
-          if(random === lista[i]) cont++;
+        let random = parseInt(Math.random () * (cards / 2));
+        for(let i = 0; i < cardlList.length; i ++){
+          if(random === cardlList[i]) counter++;
         }
-        if(cont < 2) lista.push(random);
-        cont = 0;
-    }while(lista.length < cartas);
+        if(counter < 2) cardlList.push(random);
+        counter = 0;
+    }while(cardlList.length < cards);
 
-    alert(lista);
+    alert(cardlList);
 
-    for(let i = 0; i < cartas; i ++){
-        telaGame.innerHTML += `<div class='carta flex carta-${lista[i]}' data-identifier='card' onclick='clicouCarta(this)'>
-                                    <div class='front-face face flex' data-identifier='front-face'>
-                                        <img src='assets/media/front.png'/>
-                                    </div>
-                                    <div class='back-face face flex virar' data-identifier='back-face'>
-                                        <img src='assets/media/${lista[i]}.gif'/>
-                                    </div>
-                                </div>`
+    for(let i = 0; i < cards; i ++){
+        gameScreen.innerHTML += `
+            <div class='card flex card-${cardlList[i]}' data-identifier='card' onclick='clickCard(this)'>
+                <div class='front-face face flex' data-identifier='front-face'>
+                    <img src='assets/media/front.png' alt='parrot-image'/>
+                </div>
+                <div class='back-face face flex flipped' data-identifier='back-face'>
+                    <img src='assets/media/${cardlList[i]}.gif' alt='parrot-gif'/>
+                </div>
+            </div>
+        `
     }
 }
 
-function clicouCarta(carta){
-    let frontFace = carta.querySelector(".front-face");
-    let backFace = carta.querySelector(".back-face");
-    let classeAtual = carta.classList[2];
-    let cartaVirada = carta.children[0].classList.contains("virar")
+function clickCard(card){
+    let frontFace = card.querySelector(".front-face");
+    let backFace = card.querySelector(".back-face");
+    let currentClass = card.classList[2];
+    let flippedCard = card.children[0].classList.contains("flipped")
 
-    if(cartaVirada || virando) return;
+    if(flippedCard || fliping) return;
 
-    rodadas++;
-    jogadas.innerHTML = rodadas;
+    round++;
+    rounds.innerHTML = round;
     
-    frontFace.classList.toggle("virar");
-    backFace.classList.toggle("virar");
+    frontFace.classList.toggle("flipped");
+    backFace.classList.toggle("flipped");
     
-    if(primeiraCartaEstado) {
-        primeiraCarta = carta;
-        primeiraCartaEstado = false;
+    if(firstCardState) {
+        firstCard = card;
+        firstCardState = false;
     }else{
-        let classeUltima = primeiraCarta.classList[2];
-        if(classeAtual == classeUltima){
-            carta.classList.add("acertou");
-            primeiraCarta.classList.add("acertou");
+        let lastClass = firstCard.classList[2];
+        if(currentClass == lastClass){
+            card.classList.add("right");
+            firstCard.classList.add("right");
         }else{
-            let frontFaceUltima = primeiraCarta.querySelector(".front-face");
-            let backFaceUltima = primeiraCarta.querySelector(".back-face");
-            virando = true; 
+            let lastFrontFace = firstCard.querySelector(".front-face");
+            let lastBackFace = firstCard.querySelector(".back-face");
+            fliping = true; 
             setTimeout(function(){ 
-                frontFace.classList.toggle("virar");
-                backFace.classList.toggle("virar");
-                frontFaceUltima.classList.toggle("virar");
-                backFaceUltima.classList.toggle("virar");
-                virando = false;
+                frontFace.classList.toggle("flipped");
+                backFace.classList.toggle("flipped");
+                lastFrontFace.classList.toggle("flipped");
+                lastBackFace.classList.toggle("flipped");
+                fliping = false;
             }, 1000);
         }
-        primeiraCartaEstado = true;
+        firstCardState = true;
     }
     
-    let cartasCertas = document.querySelectorAll(".acertou");
+    let rightCards = document.querySelectorAll(".right");
     
-    if(cartasCertas.length === lista.length) setTimeout(win, 1000);
+    if(rightCards.length === cardlList.length) setTimeout(win, 1000);
 }
 function win(){
-    clearInterval(somarSegundoId);
-    telaGame.classList.remove("flex");
-    telaGame.classList.add("none");
+    clearInterval(countSecondsId);
+    gameScreen.classList.remove("flex");
+    gameScreen.classList.add("none");
     gameDetails.classList.add("none");
     gameDetails.classList.remove("flex", "evenly");
-    telaWin.classList.remove("none")
-    telaWin.classList.add("opacity", "flex", "column")
+    winScreen.classList.remove("none")
+    winScreen.classList.add("opacity", "flex", "column")
     
 
-    telaWin.innerHTML = `
-    <h2>Parabéns,<br>Você ganhou em ${rodadas} rodadas<br> e demorou ${segundo} segundos!</h2>
-    <div class="reiniciar verde-escuro">
-        <h3>Quer jogar de novo?</h3>
-        <button class="verde" onclick="jogarDeNovo()">Sim</button>
-        <button class="verde" onclick="fim(this)">Não</button>
-    </div>
+    winScreen.innerHTML = `
+        <h2>Parabéns,<br>Você ganhou em ${round} rodadas<br> e demorou ${second} segundos!</h2>
+        <div class="restart dark-green">
+            <h3>Quer jogar de novo?</h3>
+            <button class="green" onclick="playAgain()">Sim</button>
+            <button class="green" onclick="end(this)">Não</button>
+        </div>
     `
 }
-function jogarDeNovo(){
-    telaGame.innerHTML = ""
-    lista = [];
+function playAgain(){
+    gameScreen.innerHTML = ""
+    cardlList = [];
 
-    telaWin.classList.remove("opacity", "flex", "column")
-    telaWin.classList.add("none")
-    telaStart.classList.remove("none")
+    winScreen.classList.remove("opacity", "flex", "column")
+    winScreen.classList.add("none")
+    startScreen.classList.remove("none")
 }
-function fim(botao){
-    botao.parentNode.remove();
+function end(button){
+    button.parentNode.remove();
 
-    telaWin.innerHTML += "<h2>Obrigado por jogar :)</h2>"
+    winScreen.innerHTML += "<h2>Obrigado por jogar :)</h2>"
 }
 
-function somarSegundo() {
-    segundos.innerHTML = segundo;
-    segundo++;
+function countSeconds() {
+    seconds.innerHTML = second;
+    second++;
 }

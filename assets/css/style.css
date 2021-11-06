@@ -22,14 +22,14 @@ h1,
 
 .start,
 .start button,
-.reiniciar,
-.reiniciar button{
+.restart,
+.restart button{
     font-size: 20px;
     line-height: 35px;
     font-weight: 700;
 }
 .start,
-.reiniciar{
+.restart{
     border-radius: 35px;
 
     text-align: center;
@@ -49,7 +49,7 @@ h1,
     text-align: center;
 }
 .start button,
-.reiniciar button{
+.restart button{
     border: 0;
     border-radius: 5px;
     padding: 5px;
@@ -77,7 +77,7 @@ h1,
     padding: 0 30px;
     margin: 0 15px;
 }
-.carta{
+.card{
     width: 117px;
     height: 146px;
 
@@ -95,10 +95,10 @@ h1,
     backface-visibility: hidden;
     transition: all .5s;
   }
-.carta img{
+.card img{
     width: 110px;
 }
-.virar {
+.flipped {
     transform: rotateY(180deg);
 }
 .win{
@@ -118,10 +118,10 @@ h1,
 .win h2:nth-child(2){
     margin-top: 50px;
 }
-.reiniciar {
+.restart {
     margin-top: 50px;
 }
-.reiniciar button{
+.restart button{
     margin: 15px 10px 0;
 }
 
@@ -139,11 +139,11 @@ h1,
 .evenly{
     justify-content: space-evenly;
 }
-.verde{
+.green{
     background-color: #EEF9BF;
     color: #75B79E;
 }
-.verde-escuro{
+.dark-green{
     background-color: #75B79E;
     color: #EEF9BF;
 }
