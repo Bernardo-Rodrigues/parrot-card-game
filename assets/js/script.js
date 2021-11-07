@@ -22,6 +22,7 @@ function play () {
     rounds.innerHTML = round;
     second = 0;
     seconds.innerHTML = second;
+    countSecondsId = setInterval(countSeconds, 1000);
 
     if(cards < 4 || cards > 14 || (cards % 2 !== 0)){
         if(!invalid) startScreen.innerHTML += "<h2>Quantidade inválida de cartas!</h2>";
@@ -37,7 +38,6 @@ function play () {
     }
 }
 function distributeCards(cards){
-    countSecondsId = setInterval(countSeconds, 1000);
     let counter = 0;
 
     do{
@@ -136,6 +136,6 @@ function end(button){
     winScreen.innerHTML += "<h2>Obrigado por jogar :)</h2>"
 }
 function countSeconds() {
-    seconds.innerHTML = second;
     second++;
+    seconds.innerHTML = second;
 }
