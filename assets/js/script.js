@@ -22,7 +22,6 @@ function play () {
     rounds.innerHTML = round;
     second = 0;
     seconds.innerHTML = second;
-    countSecondsId = setInterval(countSeconds, 1000);
 
     if(cards < 4 || cards > 14 || (cards % 2 !== 0)){
         if(!invalid) startScreen.innerHTML += "<h2>Quantidade inválida de cartas!</h2>";
@@ -39,6 +38,7 @@ function play () {
 }
 function distributeCards(cards){
     let counter = 0;
+    countSecondsId = setInterval(countSeconds, 1000);
 
     do{
         let random = parseInt(Math.random () * (cards / 2));
