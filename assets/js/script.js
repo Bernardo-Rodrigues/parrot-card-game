@@ -52,10 +52,10 @@ function distributeCards(cards){
     for(let i = 0; i < cards; i ++){
         gameScreen.innerHTML += `
             <div class='card flex card-${cardlList[i]}' data-identifier='card' onclick='clickCard(this)'>
-                <div class='front-face face flex' data-identifier='front-face'>
+                <div class='back-face face flex' data-identifier='back-face'>
                     <img src='assets/media/front.png' alt='parrot-image'/>
                 </div>
-                <div class='back-face face flex flipped' data-identifier='back-face'>
+                <div class='front-face face flex flipped' data-identifier='front-face'>
                     <img src='assets/media/${cardlList[i]}.gif' alt='parrot-gif'/>
                 </div>
             </div>
